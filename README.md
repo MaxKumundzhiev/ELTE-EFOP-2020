@@ -1,6 +1,27 @@
 # ELTE-EFOP-2020
 Developing Approaches for Estimating Models Based on Hyper Graphs within Dynamic Business Processes.
 
+# Setup 
+### Tools:
+```
+Under reviewing...
+- Oracle Virtual Machine (issued to change on AWS EC2 in future)
+- Cloudera Quickstart Sandbox VM
+- Hortonworks Quickstart Sandbox VM
+```
+
+- Download and Install [Oracle VirtualBox](https://download.virtualbox.org/virtualbox/6.1.4/VirtualBox-6.1.4-136177-OSX.dmg)
+- Download [Cloudera Quickstart Sandbox]()
+
+### Terminal
+- brew install wget 
+- wget https://archive.cloudera.com/cm7/7.0.3/cloudera-manager-installer.bin
+- chmod u+x cloudera-manager-installer.bin
+- sudo ./cloudera-manager-installer.bin
+
+
+
+
 <b>References:</b><br>
 <ul>
 <li><a href="https://machinelearningmastery.com/estimate-performance-machine-learning-algorithms-weka/">WEKA</a></li>
