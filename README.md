@@ -14,10 +14,10 @@ Under reviewing...
 - Download [Cloudera Quickstart Sandbox]()
 
 ### Terminal
-```brew install wget```
-```wget https://archive.cloudera.com/cm7/7.0.3/cloudera-manager-installer.bin```
-```chmod u+x cloudera-manager-installer.bin```
-```sudo ./cloudera-manager-installer.bin```
+```brew install wget```<br>
+```wget https://archive.cloudera.com/cm7/7.0.3/cloudera-manager-installer.bin```<br>
+```chmod u+x cloudera-manager-installer.bin```<br>
+```sudo ./cloudera-manager-installer.bin```<br>
 
 
 <b>References:</b><br>
