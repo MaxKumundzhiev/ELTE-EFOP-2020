@@ -1,31 +1,49 @@
 # ELTE-EFOP-2020
 Developing Approaches for Estimating Models Based on Hyper Graphs within Dynamic Business Processes.
 
-# Setup 
-### Tools:
-```
-Under reviewing...
-- Oracle Virtual Machine (issued to change on AWS EC2 in future)
-- Cloudera Quickstart Sandbox VM
-- Hortonworks Quickstart Sandbox VM
-```
+#Tools
+<ul>
+<h2>S3 Data Uploader</h2>
+The tool assumed to download data from TFL and upload to the dedicated S3 Bucket
 
-- Download and Install [Oracle VirtualBox](https://download.virtualbox.org/virtualbox/6.1.4/VirtualBox-6.1.4-136177-OSX.dmg)
-- Download [Cloudera Quickstart Sandbox]()
+#### Get help: 
+````bash
+cd s3_upload && python handler.py -h   
+````
+#### Run the Script: 
+````bash
+cd s3_upload && python handler.py --id --key --year  
+````
+#### Example: 
+````bash
+cd s_upload && python handler.py --id tfl_id --key tfl_key --year 2020  
+````
+</ul>
 
-### Terminal
-```brew install wget```<br>
-```wget https://archive.cloudera.com/cm7/7.0.3/cloudera-manager-installer.bin```<br>
-```chmod u+x cloudera-manager-installer.bin```<br>
-```sudo ./cloudera-manager-installer.bin```<br>
+<ul>
+<h2>Lambda Data Preprocessor</h2>
+The tool assumed to preprocessor uploaded data in the dedicated S3 Bucket
 
+#### Get help: 
+````bash
+cd lambda_transform && python handler.py -h   
+````
+#### Run the Script: 
+````bash
+cd lambda_transform && python handler.py   
+````
+#### Example: 
+````bash
+cd lambda_transform && python handler.py   
+````
+</ul>
 
 <b>References:</b><br>
 <ul>
 <li><a href="https://machinelearningmastery.com/estimate-performance-machine-learning-algorithms-weka/">WEKA</a></li>
   <li><a href="https://drive.google.com/file/d/1Bo1c6BJNfdim81CWp7VbqLNkP3RAawGk/view?ts=5e55708d">Data Scheme</a></li>
   <li><a href="https://www.researchgate.net/publication/273462758_Hadoop_Performance_Modeling_for_Job_Estimation_and_Resource_Provisioning">Hadoop Performance Paper</a></li>
-<ul>
+</ul>
 
 
 <b>Supervised by : Balint Molnar</b><br>
