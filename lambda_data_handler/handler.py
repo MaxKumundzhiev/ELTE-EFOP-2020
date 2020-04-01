@@ -15,7 +15,7 @@ import pandas as pd
 import requests as re
 from botocore.exceptions import ClientError
 from six import StringIO
-#from tfl_data_handler.settings import LOGGER
+#from lambda_data_handler.settings import LOGGER
 
 
 class DataUpload:
@@ -66,9 +66,6 @@ if __name__ == '__main__':
 
     data = DataUpload(**args).get_data()
     logging.info('Data downloaded successfully')
-
-    # DataUpload(**args).s3_create_bucket()
-    # logging.info('Bucket created successfully')
 
     DataUpload(**args).s3_upload(data)
     logging.info('Data uploaded successfully')
