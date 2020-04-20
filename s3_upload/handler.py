@@ -6,6 +6,7 @@
 # email: kumundzhievmaxim@gmail.com
 # github: https://github.com/KumundzhievMaxim
 # -------------------------------------------
+import os
 import boto3
 import logging
 import argparse
@@ -37,10 +38,10 @@ class DataUploader:
         [--id tfl_app_id --key tfl_app_key --year 2020]
     """
 
-    def __init__(self, app_id, app_key, year):
+    def __init__(self, id, key, year):
         self.year = year
         self.target = 'tfl-accidents-{}.csv'.format(year)
-        self.params = dict(app_id=app_id, app_key=app_key)
+        self.params = dict(app_id=id, app_key=key)
 
     def get_data(self):
         response = re.get(url='https://api.tfl.gov.uk/AccidentStats/{}'.format(self.year), params=self.params)
@@ -49,7 +50,7 @@ class DataUploader:
     def upload_s3(self, dataframe):
         csv_buffer = StringIO()
         dataframe.to_csv(csv_buffer)
-        client = boto3.client('s3_upload')
+        client = boto3.client('s3')
 
         response = client.put_object(
             Body=csv_buffer.getvalue(),
@@ -71,7 +72,7 @@ if __name__ == '__main__':
     args = vars(parser.parse_args())
 
     data = DataUploader(**args).get_data()
-    logging.info('Data downloaded successfully')
+    logging.info('Successfully Downloaded Accidents for {}'.format(args['year']))
 
     DataUploader(**args).upload_s3(data)
-    logging.info('Data uploaded successfully')
+    logging.info('Successfully Uploaded Accidents for {} to S3 {}'.format(args['year'], APP['source']))
