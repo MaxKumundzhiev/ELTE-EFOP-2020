@@ -30,23 +30,7 @@ cd s_upload && python handler.py --id tfl_id --key tfl_key --year 2020
 ````
 </ul>
 
-<ul>
-<h2>Lambda Data Preprocessor</h2>
-The tool assumed to preprocessor uploaded data in the dedicated S3 Bucket
 
-#### Get help: 
-````bash
-cd lambda_transform && python handler.py -h   
-````
-#### Run the Script: 
-````bash
-cd lambda_transform && python handler.py   
-````
-#### Example: 
-````bash
-cd lambda_transform && python handler.py   
-````
-</ul>
 
 <b>References:</b><br>
 <ul>
