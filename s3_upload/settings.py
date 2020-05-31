@@ -9,6 +9,7 @@
 
 
 APP = dict(
+    local_dir='/Users/macbook/Documents/GitRep/ELTE_EFOP/ELTE-EFOP-2020',
     name='S3_Uploader',
     source='tfl-accidents',
     description='Data Uploader Job to upload data to dedicated S3 bucket.',
