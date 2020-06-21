@@ -72,12 +72,12 @@ def generate_hyper_from_bipartite(dataframe: pd.DataFrame):
     B.add_nodes_from(dataframe['activity_type'], bipartite=0)
 
     B.add_weighted_edges_from(
-        [(row['process_id'], row['activity_type'], 1) for idx, row in dataframe.iterrows()],
+        [(row['process_id'], row['activity_type'], dataframe.iloc[idx, :]) for idx, row in dataframe.iterrows()],
         weight='weight')
 
     top_nodes = {n for n, d in B.nodes(data=True) if d['bipartite'] == 0}
     bottom_nodes = set(B) - top_nodes
-    spectral_bipartivity = nx.bipartite.spectral_bipartivity(B)
+    # spectral_bipartivity = nx.bipartite.spectral_bipartivity(B)
 
     nodes = nx.bipartite.maximum_matching(B, top_nodes=bottom_nodes)
 
@@ -94,8 +94,8 @@ def generate_hyper_from_bipartite(dataframe: pd.DataFrame):
         rows_dict = ({
             'left_node': left,
             'right_node': right_nodes[index],
+            'edge_data': B.get_edge_data(left, right_nodes[index]),
             'is_bipartite': nx.is_bipartite(B),
-            'spectral_bipartivity': spectral_bipartivity,
             'clustering_coeff': clustering_coeff[index],
             'latapy_clustering': latapy_clustering[index],
             'average_graph_clustering': average_graph_clustering,
@@ -113,6 +113,12 @@ def plot_graph(graph):
     """
     hnx.draw(graph)
     plt.show()
+
+    hnx.draw_two_column(graph,
+                        with_node_labels=True,
+                        with_edge_labels=True,
+                        with_color=True)
+    plt.show()
     return
 
 
@@ -125,18 +131,18 @@ if __name__ == "__main__":
         HBG: hypergraph from bipartate graph;
     """
     # Hypergraph from dict
-    HG = construct_graph_from_dict()
-    #plot_graph(HG)
+    # HG = construct_graph_from_dict()
+    # plot_graph(HG)
 
     # Hypergraph from predefiend bipartate graph
     data_df = generate_bipartite_data(20)
     HBG, df_characteristics = generate_hyper_from_bipartite(data_df)
     print(df_characteristics)
-    #plot_graph(HBG)
+    plot_graph(HBG)
 
     # Dual Hypergraph, Nodes and edges switched.
     HD = HBG.dual()
-    #plot_graph(HD)
+    plot_graph(HD)
 
     print(algorithms.homology_mod2.hypergraph_homology_basis(HBG, k=2, shortest=True))
 
