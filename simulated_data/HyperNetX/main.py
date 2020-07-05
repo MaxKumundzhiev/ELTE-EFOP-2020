@@ -49,13 +49,13 @@ def generate_bipartite_data(rows: int):
     process_type = ['bulk', 'load', 'download', 'remove', 'create']
     activity_type = ['sequence', 'exclusive choice', 'parallel', 'multiple choice', 'multiple merge', 'cycle']
 
-    columns_list = ['process_id', 'process_type', 'process_cost', 'execution_time', 'activity_type']
+    columns_list = ['activity_id', 'process_type', 'process_cost', 'execution_time', 'activity_type']
 
     result_df = pd.DataFrame(columns=columns_list)
 
     for number in range(rows):
         buffer = pd.DataFrame({
-            'process_id': [number],
+            'activity_id': [number],
             'process_type': choice(process_type),
             'process_cost': [(str(randint(0, 200))) + '$'],
             'execution_time': [str(randint(0., 120.)) + (' sec')],
@@ -68,11 +68,11 @@ def generate_bipartite_data(rows: int):
 
 def generate_hyper_from_bipartite(dataframe: pd.DataFrame):
     B = nx.Graph()
-    B.add_nodes_from(dataframe['process_id'], bipartite=1)
+    B.add_nodes_from(dataframe['activity_id'], bipartite=1)
     B.add_nodes_from(dataframe['activity_type'], bipartite=0)
 
     B.add_weighted_edges_from(
-        [(row['process_id'], row['activity_type'], dataframe.iloc[idx, :]) for idx, row in dataframe.iterrows()],
+        [(row['activity_id'], row['activity_type'], dataframe.iloc[idx, :]) for idx, row in dataframe.iterrows()],
         weight='weight')
 
     top_nodes = {n for n, d in B.nodes(data=True) if d['bipartite'] == 0}
@@ -137,6 +137,8 @@ if __name__ == "__main__":
     # Hypergraph from predefiend bipartate graph
     data_df = generate_bipartite_data(20)
     HBG, df_characteristics = generate_hyper_from_bipartite(data_df)
+
+    df_characteristics.to_csv('/Users/macbook/Desktop/charactiristics.csv', index=True)
     print(df_characteristics)
     plot_graph(HBG)
 
@@ -144,5 +146,5 @@ if __name__ == "__main__":
     HD = HBG.dual()
     plot_graph(HD)
 
-    print(algorithms.homology_mod2.hypergraph_homology_basis(HBG, k=2, shortest=True))
+    # print(algorithms.homology_mod2.hypergraph_homology_basis(HBG, k=2, shortest=True))
 

@@ -89,8 +89,8 @@ def Smith(M):
     R = IdentityMatrix(num_colonne)
     maxs=min(num_righe,num_colonne)
     for s in range(maxs):
-        print ("step %s/%s\n" % (s+1,maxs))
-        print ("M:", display(M)
+        print("step %s/%s\n" % (s+1,maxs))
+        print("M: %s" % display(M))
         while not is_lone(M,s):
             i,j = MinAij(M,s) # the non-zero entry with min |.|
             swap_rows(M,s,i)
@@ -115,6 +115,7 @@ def Smith(M):
                     add_to_row(L,s,1,x)
                 else:
                     if M[s][s]<0:
-                    change_sign_row(M,s)
-                    change_sign_row(L,s)
+                        change_sign_row(M,s)
+                        change_sign_row(L,s)
     return L,R
+
