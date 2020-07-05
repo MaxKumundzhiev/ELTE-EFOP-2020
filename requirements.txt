@@ -1,0 +1,5 @@
+matplotlib
+boto3
+networkx
+pandas
+hypernetx

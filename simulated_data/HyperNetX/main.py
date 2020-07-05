@@ -138,7 +138,7 @@ if __name__ == "__main__":
     data_df = generate_bipartite_data(20)
     HBG, df_characteristics = generate_hyper_from_bipartite(data_df)
 
-    df_characteristics.to_csv('/Users/macbook/Desktop/charactiristics.csv', index=True)
+    df_characteristics.to_csv('../charactiristics.csv', index=True)
     print(df_characteristics)
     plot_graph(HBG)
 

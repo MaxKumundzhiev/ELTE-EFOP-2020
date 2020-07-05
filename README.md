@@ -30,6 +30,27 @@ cd s_upload && python handler.py --id tfl_id --key tfl_key --year 2020
 ````
 </ul>
 
+# Docker deployment
+### Download Docker Image from DockerHub
+
+### Build Docker Image
+```bash
+docker build -t hypergraph .
+```
+where <t> - name of Docker Image,  <.> path to entrypoint
+
+### Run Docker Image <Container>
+```bash
+docker run --rm --name efop -d  hypergraph
+```
+where : 
+<name>  -  name of Docker Container,
+<hypergraph> - name of Docker Image;
+<-d> - run in background mode;
+<--rm> - remove Docker Container after execution;
+
+
+
 
 
 <b>References:</b><br>
